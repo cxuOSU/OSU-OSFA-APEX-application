@@ -27,7 +27,7 @@ prompt APPLICATION 165 - OSU - Stillwater Stats Database
 -- Application Export:
 --   Application:     165
 --   Name:            OSU - Stillwater Stats Database
---   Date and Time:   12:03 Friday October 6, 2023
+--   Date and Time:   13:24 Friday October 6, 2023
 --   Exported By:     XCHEN
 --   Flashback:       0
 --   Export Type:     Page Export
@@ -51,7 +51,7 @@ wwv_flow_api.create_page(
 ,p_css_file_urls=>'#APP_IMAGES#main.css'
 ,p_page_template_options=>'#DEFAULT#'
 ,p_last_updated_by=>'XCHEN'
-,p_last_upd_yyyymmddhh24miss=>'20231006120244'
+,p_last_upd_yyyymmddhh24miss=>'20231006132346'
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(79711958088254824)
@@ -83,7 +83,7 @@ wwv_flow_api.create_page_plug(
 );
 wwv_flow_api.create_page_button(
  p_id=>wwv_flow_api.id(79714544646254850)
-,p_button_sequence=>60
+,p_button_sequence=>20
 ,p_button_plug_id=>wwv_flow_api.id(79714419171254849)
 ,p_button_name=>'CREATE/UPDATE'
 ,p_button_action=>'SUBMIT'
@@ -91,9 +91,27 @@ wwv_flow_api.create_page_button(
 ,p_button_template_id=>wwv_flow_api.id(56738600440843712)
 ,p_button_is_hot=>'Y'
 ,p_button_image_alt=>'Create &#x2F; Update'
-,p_button_position=>'BODY'
-,p_grid_new_row=>'N'
-,p_grid_new_column=>'N'
+,p_button_position=>'REGION_TEMPLATE_CLOSE'
+);
+wwv_flow_api.create_page_button(
+ p_id=>wwv_flow_api.id(79820984946203501)
+,p_button_sequence=>10
+,p_button_plug_id=>wwv_flow_api.id(79714419171254849)
+,p_button_name=>'DELETE'
+,p_button_action=>'SUBMIT'
+,p_button_template_options=>'#DEFAULT#'
+,p_button_template_id=>wwv_flow_api.id(56738600440843712)
+,p_button_image_alt=>'Delete'
+,p_button_position=>'REGION_TEMPLATE_CREATE'
+);
+wwv_flow_api.create_page_branch(
+ p_id=>wwv_flow_api.id(79821184924203503)
+,p_branch_name=>'After Delete'
+,p_branch_action=>'f?p=&APP_ID.:17:&SESSION.::&DEBUG.:RP:P17_RMS_DATE,P17_RMS_EMP_ID:,&success_msg=#SUCCESS_MSG#'
+,p_branch_point=>'AFTER_PROCESSING'
+,p_branch_type=>'REDIRECT_URL'
+,p_branch_when_button_id=>wwv_flow_api.id(79820984946203501)
+,p_branch_sequence=>10
 );
 wwv_flow_api.create_page_item(
  p_id=>wwv_flow_api.id(79712165423254826)
@@ -103,7 +121,7 @@ wwv_flow_api.create_page_item(
 ,p_item_sequence=>20
 ,p_item_plug_id=>wwv_flow_api.id(79711958088254824)
 ,p_item_source_plug_id=>wwv_flow_api.id(79711958088254824)
-,p_prompt=>'Rms Emp Id'
+,p_prompt=>'Emp Name'
 ,p_source=>'RMS_EMP_ID'
 ,p_source_type=>'REGION_SOURCE_COLUMN'
 ,p_display_as=>'NATIVE_SELECT_LIST'
@@ -129,7 +147,7 @@ wwv_flow_api.create_page_item(
 ,p_item_sequence=>10
 ,p_item_plug_id=>wwv_flow_api.id(79711958088254824)
 ,p_item_source_plug_id=>wwv_flow_api.id(79711958088254824)
-,p_prompt=>'Rms Date'
+,p_prompt=>'Date'
 ,p_source=>'RMS_DATE'
 ,p_source_type=>'REGION_SOURCE_COLUMN'
 ,p_display_as=>'NATIVE_DATE_PICKER'
@@ -149,7 +167,7 @@ wwv_flow_api.create_page_item(
 ,p_item_plug_id=>wwv_flow_api.id(79711958088254824)
 ,p_item_source_plug_id=>wwv_flow_api.id(79711958088254824)
 ,p_item_default=>'0'
-,p_prompt=>'Rms Acd'
+,p_prompt=>'ACD'
 ,p_source=>'RMS_ACD'
 ,p_source_type=>'REGION_SOURCE_COLUMN'
 ,p_display_as=>'NATIVE_NUMBER_FIELD'
@@ -167,7 +185,7 @@ wwv_flow_api.create_page_item(
 ,p_item_plug_id=>wwv_flow_api.id(79711958088254824)
 ,p_item_source_plug_id=>wwv_flow_api.id(79711958088254824)
 ,p_item_default=>'0'
-,p_prompt=>'Rms Phone'
+,p_prompt=>'Phone'
 ,p_source=>'RMS_PHONE'
 ,p_source_type=>'REGION_SOURCE_COLUMN'
 ,p_display_as=>'NATIVE_NUMBER_FIELD'
@@ -185,7 +203,7 @@ wwv_flow_api.create_page_item(
 ,p_item_plug_id=>wwv_flow_api.id(79711958088254824)
 ,p_item_source_plug_id=>wwv_flow_api.id(79711958088254824)
 ,p_item_default=>'0'
-,p_prompt=>'Rms Curr Hs E In'
+,p_prompt=>'Current H.S. E-IN'
 ,p_source=>'RMS_CURR_HS_E_IN'
 ,p_source_type=>'REGION_SOURCE_COLUMN'
 ,p_display_as=>'NATIVE_NUMBER_FIELD'
@@ -203,7 +221,7 @@ wwv_flow_api.create_page_item(
 ,p_item_plug_id=>wwv_flow_api.id(79711958088254824)
 ,p_item_source_plug_id=>wwv_flow_api.id(79711958088254824)
 ,p_item_default=>'0'
-,p_prompt=>'Rms Curr Hs E Out'
+,p_prompt=>'Current H.S. E-Out'
 ,p_source=>'RMS_CURR_HS_E_OUT'
 ,p_source_type=>'REGION_SOURCE_COLUMN'
 ,p_display_as=>'NATIVE_NUMBER_FIELD'
@@ -222,7 +240,7 @@ wwv_flow_api.create_page_item(
 ,p_item_plug_id=>wwv_flow_api.id(79711958088254824)
 ,p_item_source_plug_id=>wwv_flow_api.id(79711958088254824)
 ,p_item_default=>'0'
-,p_prompt=>'Rms Inc Trans E In'
+,p_prompt=>'Inc. Transfer E-In'
 ,p_source=>'RMS_INC_TRANS_E_IN'
 ,p_source_type=>'REGION_SOURCE_COLUMN'
 ,p_display_as=>'NATIVE_NUMBER_FIELD'
@@ -240,7 +258,7 @@ wwv_flow_api.create_page_item(
 ,p_item_plug_id=>wwv_flow_api.id(79711958088254824)
 ,p_item_source_plug_id=>wwv_flow_api.id(79711958088254824)
 ,p_item_default=>'0'
-,p_prompt=>'Rms Inc Trans E Out'
+,p_prompt=>'Inc. Transfer E-Out'
 ,p_source=>'RMS_INC_TRANS_E_OUT'
 ,p_source_type=>'REGION_SOURCE_COLUMN'
 ,p_display_as=>'NATIVE_NUMBER_FIELD'
@@ -259,7 +277,7 @@ wwv_flow_api.create_page_item(
 ,p_item_plug_id=>wwv_flow_api.id(79711958088254824)
 ,p_item_source_plug_id=>wwv_flow_api.id(79711958088254824)
 ,p_item_default=>'0'
-,p_prompt=>'Rms Inc Grad E In'
+,p_prompt=>'Incoming Grad E-In'
 ,p_source=>'RMS_INC_GRAD_E_IN'
 ,p_source_type=>'REGION_SOURCE_COLUMN'
 ,p_display_as=>'NATIVE_NUMBER_FIELD'
@@ -277,7 +295,7 @@ wwv_flow_api.create_page_item(
 ,p_item_plug_id=>wwv_flow_api.id(79711958088254824)
 ,p_item_source_plug_id=>wwv_flow_api.id(79711958088254824)
 ,p_item_default=>'0'
-,p_prompt=>'Rms Inc Grad E Out'
+,p_prompt=>'Incoming Grad E-Out'
 ,p_source=>'RMS_INC_GRAD_E_OUT'
 ,p_source_type=>'REGION_SOURCE_COLUMN'
 ,p_display_as=>'NATIVE_NUMBER_FIELD'
@@ -296,7 +314,7 @@ wwv_flow_api.create_page_item(
 ,p_item_plug_id=>wwv_flow_api.id(79711958088254824)
 ,p_item_source_plug_id=>wwv_flow_api.id(79711958088254824)
 ,p_item_default=>'0'
-,p_prompt=>'Rms Curr Ug E In'
+,p_prompt=>'Current UG E-In'
 ,p_source=>'RMS_CURR_UG_E_IN'
 ,p_source_type=>'REGION_SOURCE_COLUMN'
 ,p_display_as=>'NATIVE_NUMBER_FIELD'
@@ -314,7 +332,7 @@ wwv_flow_api.create_page_item(
 ,p_item_plug_id=>wwv_flow_api.id(79711958088254824)
 ,p_item_source_plug_id=>wwv_flow_api.id(79711958088254824)
 ,p_item_default=>'0'
-,p_prompt=>'Rms Curr Ug E Out'
+,p_prompt=>'Current UG E-Out'
 ,p_source=>'RMS_CURR_UG_E_OUT'
 ,p_source_type=>'REGION_SOURCE_COLUMN'
 ,p_display_as=>'NATIVE_NUMBER_FIELD'
@@ -333,7 +351,7 @@ wwv_flow_api.create_page_item(
 ,p_item_plug_id=>wwv_flow_api.id(79711958088254824)
 ,p_item_source_plug_id=>wwv_flow_api.id(79711958088254824)
 ,p_item_default=>'0'
-,p_prompt=>'Rms Grad Vet Med Ein'
+,p_prompt=>'Grad/Vet Med E-In'
 ,p_source=>'RMS_GRAD_VET_MED_EIN'
 ,p_source_type=>'REGION_SOURCE_COLUMN'
 ,p_display_as=>'NATIVE_NUMBER_FIELD'
@@ -351,7 +369,7 @@ wwv_flow_api.create_page_item(
 ,p_item_plug_id=>wwv_flow_api.id(79711958088254824)
 ,p_item_source_plug_id=>wwv_flow_api.id(79711958088254824)
 ,p_item_default=>'0'
-,p_prompt=>'Rms Grad Vet Med Eout'
+,p_prompt=>'Grad/Vet Med E-Out'
 ,p_source=>'RMS_GRAD_VET_MED_EOUT'
 ,p_source_type=>'REGION_SOURCE_COLUMN'
 ,p_display_as=>'NATIVE_NUMBER_FIELD'
@@ -370,7 +388,7 @@ wwv_flow_api.create_page_item(
 ,p_item_plug_id=>wwv_flow_api.id(79711958088254824)
 ,p_item_source_plug_id=>wwv_flow_api.id(79711958088254824)
 ,p_item_default=>'0'
-,p_prompt=>'Rms Combo Offer Ein'
+,p_prompt=>'Combo/Other E-In'
 ,p_source=>'RMS_COMBO_OFFER_EIN'
 ,p_source_type=>'REGION_SOURCE_COLUMN'
 ,p_display_as=>'NATIVE_NUMBER_FIELD'
@@ -388,7 +406,7 @@ wwv_flow_api.create_page_item(
 ,p_item_plug_id=>wwv_flow_api.id(79711958088254824)
 ,p_item_source_plug_id=>wwv_flow_api.id(79711958088254824)
 ,p_item_default=>'0'
-,p_prompt=>'Rms Combo Offer Eout'
+,p_prompt=>'Combo/Other E-Out'
 ,p_source=>'RMS_COMBO_OFFER_EOUT'
 ,p_source_type=>'REGION_SOURCE_COLUMN'
 ,p_display_as=>'NATIVE_NUMBER_FIELD'
@@ -407,7 +425,7 @@ wwv_flow_api.create_page_item(
 ,p_item_plug_id=>wwv_flow_api.id(79711958088254824)
 ,p_item_source_plug_id=>wwv_flow_api.id(79711958088254824)
 ,p_item_default=>'0'
-,p_prompt=>'Rms For Stud E In'
+,p_prompt=>'Former Stud. E-In'
 ,p_source=>'RMS_FOR_STUD_E_IN'
 ,p_source_type=>'REGION_SOURCE_COLUMN'
 ,p_display_as=>'NATIVE_NUMBER_FIELD'
@@ -425,7 +443,7 @@ wwv_flow_api.create_page_item(
 ,p_item_plug_id=>wwv_flow_api.id(79711958088254824)
 ,p_item_source_plug_id=>wwv_flow_api.id(79711958088254824)
 ,p_item_default=>'0'
-,p_prompt=>'Rms For Stud E Out'
+,p_prompt=>'Former Stud. E-Out'
 ,p_source=>'RMS_FOR_STUD_E_OUT'
 ,p_source_type=>'REGION_SOURCE_COLUMN'
 ,p_display_as=>'NATIVE_NUMBER_FIELD'
@@ -444,7 +462,7 @@ wwv_flow_api.create_page_item(
 ,p_item_plug_id=>wwv_flow_api.id(79714419171254849)
 ,p_item_source_plug_id=>wwv_flow_api.id(79711958088254824)
 ,p_item_default=>'0'
-,p_prompt=>'Rms In Person'
+,p_prompt=>'In Person'
 ,p_source=>'RMS_IN_PERSON'
 ,p_source_type=>'REGION_SOURCE_COLUMN'
 ,p_display_as=>'NATIVE_NUMBER_FIELD'
@@ -462,7 +480,7 @@ wwv_flow_api.create_page_item(
 ,p_item_plug_id=>wwv_flow_api.id(79714419171254849)
 ,p_item_source_plug_id=>wwv_flow_api.id(79711958088254824)
 ,p_item_default=>'0'
-,p_prompt=>'Rms Email In'
+,p_prompt=>'Email In'
 ,p_source=>'RMS_EMAIL_IN'
 ,p_source_type=>'REGION_SOURCE_COLUMN'
 ,p_display_as=>'NATIVE_NUMBER_FIELD'
@@ -482,7 +500,7 @@ wwv_flow_api.create_page_item(
 ,p_item_plug_id=>wwv_flow_api.id(79714419171254849)
 ,p_item_source_plug_id=>wwv_flow_api.id(79711958088254824)
 ,p_item_default=>'0'
-,p_prompt=>'Rms Email Out'
+,p_prompt=>'Email Out'
 ,p_source=>'RMS_EMAIL_OUT'
 ,p_source_type=>'REGION_SOURCE_COLUMN'
 ,p_display_as=>'NATIVE_NUMBER_FIELD'
@@ -502,7 +520,7 @@ wwv_flow_api.create_page_item(
 ,p_item_plug_id=>wwv_flow_api.id(79714419171254849)
 ,p_item_source_plug_id=>wwv_flow_api.id(79711958088254824)
 ,p_item_default=>'0'
-,p_prompt=>'Rms Reports'
+,p_prompt=>'Reports'
 ,p_source=>'RMS_REPORTS'
 ,p_source_type=>'REGION_SOURCE_COLUMN'
 ,p_display_as=>'NATIVE_NUMBER_FIELD'
@@ -522,7 +540,7 @@ wwv_flow_api.create_page_item(
 ,p_item_plug_id=>wwv_flow_api.id(79714419171254849)
 ,p_item_source_plug_id=>wwv_flow_api.id(79711958088254824)
 ,p_item_default=>'0'
-,p_prompt=>'Rms Misc'
+,p_prompt=>'Misc'
 ,p_source=>'RMS_MISC'
 ,p_source_type=>'REGION_SOURCE_COLUMN'
 ,p_display_as=>'NATIVE_NUMBER_FIELD'
@@ -650,6 +668,19 @@ wwv_flow_api.create_page_process(
 ,p_error_display_location=>'INLINE_IN_NOTIFICATION'
 ,p_process_when_button_id=>wwv_flow_api.id(79714544646254850)
 ,p_process_success_message=>'Successfully Submitted'
+);
+wwv_flow_api.create_page_process(
+ p_id=>wwv_flow_api.id(79821023531203502)
+,p_process_sequence=>20
+,p_process_point=>'AFTER_SUBMIT'
+,p_process_type=>'NATIVE_PLSQL'
+,p_process_name=>'DELETE_SCHOLARSHIPS'
+,p_process_sql_clob=>wwv_flow_string.join(wwv_flow_t_varchar2(
+'DELETE FROM REC_MANG_SCHOL',
+'WHERE RMS_DATE = :P17_RMS_DATE',
+'  AND RMS_EMP_ID = :P17_RMS_EMP_ID;'))
+,p_error_display_location=>'INLINE_IN_NOTIFICATION'
+,p_process_when_button_id=>wwv_flow_api.id(79820984946203501)
 );
 wwv_flow_api.create_page_process(
  p_id=>wwv_flow_api.id(79712065735254825)
