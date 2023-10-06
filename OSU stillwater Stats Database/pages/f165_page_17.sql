@@ -27,7 +27,7 @@ prompt APPLICATION 165 - OSU - Stillwater Stats Database
 -- Application Export:
 --   Application:     165
 --   Name:            OSU - Stillwater Stats Database
---   Date and Time:   08:54 Friday October 6, 2023
+--   Date and Time:   10:08 Friday October 6, 2023
 --   Exported By:     XCHEN
 --   Flashback:       0
 --   Export Type:     Page Export
@@ -46,16 +46,17 @@ wwv_flow_api.create_page(
  p_id=>17
 ,p_user_interface_id=>wwv_flow_api.id(56761143659843755)
 ,p_name=>'Goto_New_Records_Scholarships'
-,p_step_title=>'New_Records_Management_scholarships'
+,p_step_title=>'New Records Management scholarships'
 ,p_autocomplete_on_off=>'OFF'
+,p_css_file_urls=>'#APP_IMAGES#main.css'
 ,p_page_template_options=>'#DEFAULT#'
 ,p_last_updated_by=>'XCHEN'
-,p_last_upd_yyyymmddhh24miss=>'20231006085320'
+,p_last_upd_yyyymmddhh24miss=>'20231006095402'
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(66381584446705632)
 ,p_plug_name=>'Office of Scholarships and Financial Aid'
-,p_region_template_options=>'#DEFAULT#:t-Region--noBorder:t-Region--scrollBody'
+,p_region_template_options=>'#DEFAULT#:t-Region--removeHeader:t-Region--noUI:t-Region--scrollBody:margin-top-none:margin-bottom-none'
 ,p_plug_template=>wwv_flow_api.id(56680630296843656)
 ,p_plug_display_sequence=>70
 ,p_include_in_reg_disp_sel_yn=>'Y'
@@ -68,7 +69,7 @@ wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(59585974116495640)
 ,p_plug_name=>'Record Management Scholarships'
 ,p_parent_plug_id=>wwv_flow_api.id(66381584446705632)
-,p_region_template_options=>'#DEFAULT#:t-Region--scrollBody'
+,p_region_template_options=>'#DEFAULT#:t-Region--noUI:t-Region--scrollBody:margin-bottom-none:margin-left-md'
 ,p_plug_template=>wwv_flow_api.id(56680630296843656)
 ,p_plug_display_sequence=>10
 ,p_plug_display_point=>'BODY'
@@ -80,9 +81,22 @@ wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(66379314467705610)
 ,p_plug_name=>'Scholarships'
 ,p_parent_plug_id=>wwv_flow_api.id(66381584446705632)
-,p_region_template_options=>'#DEFAULT#:t-Region--scrollBody'
+,p_region_template_options=>'#DEFAULT#:t-Region--removeHeader:t-Region--noUI:t-Region--scrollBody:t-Form--labelsAbove:margin-top-none:margin-left-md'
 ,p_plug_template=>wwv_flow_api.id(56680630296843656)
 ,p_plug_display_sequence=>60
+,p_plug_display_point=>'BODY'
+,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
+,p_attribute_01=>'N'
+,p_attribute_02=>'HTML'
+);
+wwv_flow_api.create_page_plug(
+ p_id=>wwv_flow_api.id(79698896323903726)
+,p_plug_name=>'Scholarships_1'
+,p_parent_plug_id=>wwv_flow_api.id(66381584446705632)
+,p_region_template_options=>'#DEFAULT#:t-Region--removeHeader:t-Region--noUI:t-Region--scrollBody:margin-left-lg'
+,p_plug_template=>wwv_flow_api.id(56680630296843656)
+,p_plug_display_sequence=>70
+,p_plug_new_grid_row=>false
 ,p_plug_display_point=>'BODY'
 ,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
 ,p_attribute_01=>'N'
@@ -91,29 +105,34 @@ wwv_flow_api.create_page_plug(
 wwv_flow_api.create_page_button(
  p_id=>wwv_flow_api.id(66381638544705633)
 ,p_button_sequence=>10
-,p_button_plug_id=>wwv_flow_api.id(66381584446705632)
+,p_button_plug_id=>wwv_flow_api.id(66379314467705610)
 ,p_button_name=>'RMS_SUBMIT'
 ,p_button_action=>'SUBMIT'
-,p_button_template_options=>'#DEFAULT#:t-Button--iconRight'
+,p_button_template_options=>'#DEFAULT#:t-Button--large:t-Button--iconRight'
 ,p_button_template_id=>wwv_flow_api.id(56738723496843712)
 ,p_button_is_hot=>'Y'
 ,p_button_image_alt=>'Submit'
-,p_button_position=>'REGION_TEMPLATE_CREATE'
+,p_button_position=>'REGION_TEMPLATE_CLOSE'
 );
 wwv_flow_api.create_page_item(
  p_id=>wwv_flow_api.id(59586226687495643)
 ,p_name=>'RMS_EMPID'
-,p_item_sequence=>10
+,p_item_sequence=>20
 ,p_item_plug_id=>wwv_flow_api.id(59585974116495640)
 ,p_prompt=>'Emp Name'
 ,p_display_as=>'NATIVE_SELECT_LIST'
-,p_lov=>'Select   emp_first_name, emp_first_name as EMP_NAME  from emp_details where activate_flag = 1  and EMP_CAMPUS = ''STW'' and emp_dept = ''Scholarships'';'
+,p_lov=>wwv_flow_string.join(wwv_flow_t_varchar2(
+'Select  emp_first_name || '' '' || emp_last_name, emp_first_name || '' '' || emp_last_name as EMP_NAME  ',
+'from emp_details ',
+'where activate_flag = 1  and EMP_CAMPUS = ''STW'' and emp_dept = ''Scholarships'';',
+''))
 ,p_lov_display_null=>'YES'
 ,p_lov_cascade_parent_items=>'RMS_DATE'
 ,p_ajax_items_to_submit=>'RMS_DATE'
 ,p_ajax_optimize_refresh=>'Y'
 ,p_cHeight=>1
-,p_colspan=>6
+,p_begin_on_new_line=>'N'
+,p_begin_on_new_field=>'N'
 ,p_field_template=>wwv_flow_api.id(56737573338843710)
 ,p_item_template_options=>'#DEFAULT#'
 ,p_lov_display_extra=>'YES'
@@ -123,12 +142,11 @@ wwv_flow_api.create_page_item(
 wwv_flow_api.create_page_item(
  p_id=>wwv_flow_api.id(59586316985495644)
 ,p_name=>'RMS_DATE'
-,p_item_sequence=>20
+,p_item_sequence=>10
 ,p_item_plug_id=>wwv_flow_api.id(59585974116495640)
 ,p_prompt=>'DATE'
 ,p_display_as=>'NATIVE_DATE_PICKER'
 ,p_cSize=>30
-,p_begin_on_new_line=>'N'
 ,p_colspan=>6
 ,p_field_template=>wwv_flow_api.id(56737573338843710)
 ,p_item_template_options=>'#DEFAULT#'
@@ -139,13 +157,14 @@ wwv_flow_api.create_page_item(
 wwv_flow_api.create_page_item(
  p_id=>wwv_flow_api.id(66379425528705611)
 ,p_name=>'RMS_ACD'
-,p_item_sequence=>10
-,p_item_plug_id=>wwv_flow_api.id(66379314467705610)
+,p_item_sequence=>20
+,p_item_plug_id=>wwv_flow_api.id(79698896323903726)
 ,p_item_default=>'0'
 ,p_prompt=>'ACD'
 ,p_display_as=>'NATIVE_NUMBER_FIELD'
 ,p_cSize=>30
-,p_colspan=>6
+,p_begin_on_new_line=>'N'
+,p_begin_on_new_field=>'N'
 ,p_field_template=>wwv_flow_api.id(56737573338843710)
 ,p_item_template_options=>'#DEFAULT#'
 ,p_attribute_03=>'right'
@@ -153,13 +172,12 @@ wwv_flow_api.create_page_item(
 wwv_flow_api.create_page_item(
  p_id=>wwv_flow_api.id(66379574722705612)
 ,p_name=>'RMS_PHONE'
-,p_item_sequence=>20
-,p_item_plug_id=>wwv_flow_api.id(66379314467705610)
+,p_item_sequence=>10
+,p_item_plug_id=>wwv_flow_api.id(79698896323903726)
 ,p_item_default=>'0'
-,p_prompt=>'Phones'
+,p_prompt=>'Phone'
 ,p_display_as=>'NATIVE_NUMBER_FIELD'
 ,p_cSize=>30
-,p_begin_on_new_line=>'N'
 ,p_colspan=>6
 ,p_field_template=>wwv_flow_api.id(56737573338843710)
 ,p_item_template_options=>'#DEFAULT#'
@@ -171,7 +189,7 @@ wwv_flow_api.create_page_item(
 ,p_item_sequence=>30
 ,p_item_plug_id=>wwv_flow_api.id(66379314467705610)
 ,p_item_default=>'0'
-,p_prompt=>'Curr Hs / Inc FR Email In'
+,p_prompt=>'Current H.S. E-In'
 ,p_display_as=>'NATIVE_NUMBER_FIELD'
 ,p_cSize=>30
 ,p_colspan=>6
@@ -185,7 +203,7 @@ wwv_flow_api.create_page_item(
 ,p_item_sequence=>40
 ,p_item_plug_id=>wwv_flow_api.id(66379314467705610)
 ,p_item_default=>'0'
-,p_prompt=>'Curr Hs / Inc FR Email Out'
+,p_prompt=>'Current H.S. E-Out'
 ,p_display_as=>'NATIVE_NUMBER_FIELD'
 ,p_cSize=>30
 ,p_begin_on_new_line=>'N'
@@ -199,7 +217,7 @@ wwv_flow_api.create_page_item(
 ,p_item_sequence=>50
 ,p_item_plug_id=>wwv_flow_api.id(66379314467705610)
 ,p_item_default=>'0'
-,p_prompt=>'Inc UG TR Email In'
+,p_prompt=>'Inc. Transfer E-In'
 ,p_display_as=>'NATIVE_NUMBER_FIELD'
 ,p_cSize=>30
 ,p_field_template=>wwv_flow_api.id(56737573338843710)
@@ -212,7 +230,7 @@ wwv_flow_api.create_page_item(
 ,p_item_sequence=>60
 ,p_item_plug_id=>wwv_flow_api.id(66379314467705610)
 ,p_item_default=>'0'
-,p_prompt=>'Inc UG Trans Email Out'
+,p_prompt=>'Inc. Transfer E-Out'
 ,p_display_as=>'NATIVE_NUMBER_FIELD'
 ,p_cSize=>30
 ,p_begin_on_new_line=>'N'
@@ -226,7 +244,7 @@ wwv_flow_api.create_page_item(
 ,p_item_sequence=>70
 ,p_item_plug_id=>wwv_flow_api.id(66379314467705610)
 ,p_item_default=>'0'
-,p_prompt=>'Inc Grad Email In'
+,p_prompt=>'Incoming Grad E-In'
 ,p_display_as=>'NATIVE_NUMBER_FIELD'
 ,p_cSize=>30
 ,p_field_template=>wwv_flow_api.id(56737573338843710)
@@ -239,7 +257,7 @@ wwv_flow_api.create_page_item(
 ,p_item_sequence=>80
 ,p_item_plug_id=>wwv_flow_api.id(66379314467705610)
 ,p_item_default=>'0'
-,p_prompt=>'Inc Grad Email Out'
+,p_prompt=>'Incoming Grad E-Out'
 ,p_display_as=>'NATIVE_NUMBER_FIELD'
 ,p_cSize=>30
 ,p_begin_on_new_line=>'N'
@@ -253,7 +271,7 @@ wwv_flow_api.create_page_item(
 ,p_item_sequence=>90
 ,p_item_plug_id=>wwv_flow_api.id(66379314467705610)
 ,p_item_default=>'0'
-,p_prompt=>'Curr UG Email In'
+,p_prompt=>'Current UG E-In'
 ,p_display_as=>'NATIVE_NUMBER_FIELD'
 ,p_cSize=>30
 ,p_field_template=>wwv_flow_api.id(56737573338843710)
@@ -266,7 +284,7 @@ wwv_flow_api.create_page_item(
 ,p_item_sequence=>100
 ,p_item_plug_id=>wwv_flow_api.id(66379314467705610)
 ,p_item_default=>'0'
-,p_prompt=>'Curr UG Email Out'
+,p_prompt=>'Current UG E-Out'
 ,p_display_as=>'NATIVE_NUMBER_FIELD'
 ,p_cSize=>30
 ,p_begin_on_new_line=>'N'
@@ -280,7 +298,7 @@ wwv_flow_api.create_page_item(
 ,p_item_sequence=>110
 ,p_item_plug_id=>wwv_flow_api.id(66379314467705610)
 ,p_item_default=>'0'
-,p_prompt=>'Grad / Vet Med Email In'
+,p_prompt=>'Grad/Vet Med E-In'
 ,p_display_as=>'NATIVE_NUMBER_FIELD'
 ,p_cSize=>30
 ,p_field_template=>wwv_flow_api.id(56737573338843710)
@@ -293,7 +311,7 @@ wwv_flow_api.create_page_item(
 ,p_item_sequence=>120
 ,p_item_plug_id=>wwv_flow_api.id(66379314467705610)
 ,p_item_default=>'0'
-,p_prompt=>'Grad / Vet Med Email Out'
+,p_prompt=>'Grad/Vet Med E-Out'
 ,p_display_as=>'NATIVE_NUMBER_FIELD'
 ,p_cSize=>30
 ,p_begin_on_new_line=>'N'
@@ -307,7 +325,7 @@ wwv_flow_api.create_page_item(
 ,p_item_sequence=>130
 ,p_item_plug_id=>wwv_flow_api.id(66379314467705610)
 ,p_item_default=>'0'
-,p_prompt=>'Combo/Other  Email In'
+,p_prompt=>'Combo/Other E-In'
 ,p_display_as=>'NATIVE_NUMBER_FIELD'
 ,p_cSize=>30
 ,p_field_template=>wwv_flow_api.id(56737573338843710)
@@ -320,7 +338,7 @@ wwv_flow_api.create_page_item(
 ,p_item_sequence=>140
 ,p_item_plug_id=>wwv_flow_api.id(66379314467705610)
 ,p_item_default=>'0'
-,p_prompt=>'Combo/Other  Email Out'
+,p_prompt=>'Combo/Other E-Out'
 ,p_display_as=>'NATIVE_NUMBER_FIELD'
 ,p_cSize=>30
 ,p_begin_on_new_line=>'N'
@@ -334,7 +352,7 @@ wwv_flow_api.create_page_item(
 ,p_item_sequence=>150
 ,p_item_plug_id=>wwv_flow_api.id(66379314467705610)
 ,p_item_default=>'0'
-,p_prompt=>'Former Student Email In'
+,p_prompt=>'Former Stud. E-In'
 ,p_display_as=>'NATIVE_NUMBER_FIELD'
 ,p_cSize=>30
 ,p_field_template=>wwv_flow_api.id(56737573338843710)
@@ -347,7 +365,7 @@ wwv_flow_api.create_page_item(
 ,p_item_sequence=>160
 ,p_item_plug_id=>wwv_flow_api.id(66379314467705610)
 ,p_item_default=>'0'
-,p_prompt=>'Former Student Email Out'
+,p_prompt=>'Former Stud. E-Out'
 ,p_display_as=>'NATIVE_NUMBER_FIELD'
 ,p_cSize=>30
 ,p_begin_on_new_line=>'N'
@@ -358,12 +376,14 @@ wwv_flow_api.create_page_item(
 wwv_flow_api.create_page_item(
  p_id=>wwv_flow_api.id(66381040372705627)
 ,p_name=>'RMS_IN_PERSON'
-,p_item_sequence=>170
-,p_item_plug_id=>wwv_flow_api.id(66379314467705610)
+,p_item_sequence=>30
+,p_item_plug_id=>wwv_flow_api.id(79698896323903726)
 ,p_item_default=>'0'
 ,p_prompt=>'In Person'
 ,p_display_as=>'NATIVE_NUMBER_FIELD'
 ,p_cSize=>30
+,p_begin_on_new_line=>'N'
+,p_begin_on_new_field=>'N'
 ,p_field_template=>wwv_flow_api.id(56737573338843710)
 ,p_item_template_options=>'#DEFAULT#'
 ,p_attribute_03=>'right'
@@ -371,12 +391,14 @@ wwv_flow_api.create_page_item(
 wwv_flow_api.create_page_item(
  p_id=>wwv_flow_api.id(66381165349705628)
 ,p_name=>'RMS_EMAIL_IN'
-,p_item_sequence=>180
-,p_item_plug_id=>wwv_flow_api.id(66379314467705610)
+,p_item_sequence=>40
+,p_item_plug_id=>wwv_flow_api.id(79698896323903726)
 ,p_item_default=>'0'
 ,p_prompt=>'Email In'
 ,p_display_as=>'NATIVE_NUMBER_FIELD'
 ,p_cSize=>30
+,p_begin_on_new_line=>'N'
+,p_begin_on_new_field=>'N'
 ,p_field_template=>wwv_flow_api.id(56737573338843710)
 ,p_item_template_options=>'#DEFAULT#'
 ,p_attribute_03=>'right'
@@ -384,13 +406,14 @@ wwv_flow_api.create_page_item(
 wwv_flow_api.create_page_item(
  p_id=>wwv_flow_api.id(66381284225705629)
 ,p_name=>'RMS_EMAIL_OUT'
-,p_item_sequence=>190
-,p_item_plug_id=>wwv_flow_api.id(66379314467705610)
+,p_item_sequence=>50
+,p_item_plug_id=>wwv_flow_api.id(79698896323903726)
 ,p_item_default=>'0'
 ,p_prompt=>'Email Out'
 ,p_display_as=>'NATIVE_NUMBER_FIELD'
 ,p_cSize=>30
 ,p_begin_on_new_line=>'N'
+,p_begin_on_new_field=>'N'
 ,p_field_template=>wwv_flow_api.id(56737573338843710)
 ,p_item_template_options=>'#DEFAULT#'
 ,p_attribute_03=>'right'
@@ -398,12 +421,14 @@ wwv_flow_api.create_page_item(
 wwv_flow_api.create_page_item(
  p_id=>wwv_flow_api.id(66381337081705630)
 ,p_name=>'RMS_RTEPORTS'
-,p_item_sequence=>200
-,p_item_plug_id=>wwv_flow_api.id(66379314467705610)
+,p_item_sequence=>60
+,p_item_plug_id=>wwv_flow_api.id(79698896323903726)
 ,p_item_default=>'0'
 ,p_prompt=>'Reports'
 ,p_display_as=>'NATIVE_NUMBER_FIELD'
 ,p_cSize=>30
+,p_begin_on_new_line=>'N'
+,p_begin_on_new_field=>'N'
 ,p_field_template=>wwv_flow_api.id(56737573338843710)
 ,p_item_template_options=>'#DEFAULT#'
 ,p_attribute_03=>'right'
@@ -411,13 +436,14 @@ wwv_flow_api.create_page_item(
 wwv_flow_api.create_page_item(
  p_id=>wwv_flow_api.id(66381439344705631)
 ,p_name=>'RMS_MISC'
-,p_item_sequence=>210
-,p_item_plug_id=>wwv_flow_api.id(66379314467705610)
+,p_item_sequence=>70
+,p_item_plug_id=>wwv_flow_api.id(79698896323903726)
 ,p_item_default=>'0'
 ,p_prompt=>'Misc'
 ,p_display_as=>'NATIVE_NUMBER_FIELD'
 ,p_cSize=>30
 ,p_begin_on_new_line=>'N'
+,p_begin_on_new_field=>'N'
 ,p_field_template=>wwv_flow_api.id(56737573338843710)
 ,p_item_template_options=>'#DEFAULT#'
 ,p_attribute_03=>'right'
