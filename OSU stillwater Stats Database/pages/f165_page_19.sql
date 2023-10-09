@@ -27,7 +27,7 @@ prompt APPLICATION 165 - OSU - Stillwater Stats Database
 -- Application Export:
 --   Application:     165
 --   Name:            OSU - Stillwater Stats Database
---   Date and Time:   09:16 Monday October 9, 2023
+--   Date and Time:   09:41 Monday October 9, 2023
 --   Exported By:     XCHEN
 --   Flashback:       0
 --   Export Type:     Page Export
@@ -51,7 +51,7 @@ wwv_flow_api.create_page(
 ,p_css_file_urls=>'#APP_IMAGES#main.css'
 ,p_page_template_options=>'#DEFAULT#'
 ,p_last_updated_by=>'XCHEN'
-,p_last_upd_yyyymmddhh24miss=>'20231009091554'
+,p_last_upd_yyyymmddhh24miss=>'20231009093928'
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(66647506350304424)
@@ -116,7 +116,7 @@ wwv_flow_api.create_page_plug(
 );
 wwv_flow_api.create_page_button(
  p_id=>wwv_flow_api.id(66649097518304439)
-,p_button_sequence=>10
+,p_button_sequence=>20
 ,p_button_plug_id=>wwv_flow_api.id(66647784914304426)
 ,p_button_name=>'REC_SUBMIT'
 ,p_button_action=>'SUBMIT'
@@ -124,7 +124,28 @@ wwv_flow_api.create_page_button(
 ,p_button_template_id=>wwv_flow_api.id(56738723496843712)
 ,p_button_is_hot=>'Y'
 ,p_button_image_alt=>'Create / Update'
+,p_button_position=>'REGION_TEMPLATE_CLOSE'
+);
+wwv_flow_api.create_page_button(
+ p_id=>wwv_flow_api.id(79908872011916219)
+,p_button_sequence=>10
+,p_button_plug_id=>wwv_flow_api.id(66647784914304426)
+,p_button_name=>'REC_DELETE'
+,p_button_action=>'REDIRECT_URL'
+,p_button_template_options=>'#DEFAULT#'
+,p_button_template_id=>wwv_flow_api.id(56738600440843712)
+,p_button_image_alt=>'Delete'
 ,p_button_position=>'REGION_TEMPLATE_CREATE'
+,p_button_redirect_url=>'javascript:apex.confirm(''Are you sure you want to delete this record?'',''REC_DELETE'');'
+);
+wwv_flow_api.create_page_branch(
+ p_id=>wwv_flow_api.id(79908956678916220)
+,p_branch_name=>'AFTER_DELETE'
+,p_branch_action=>'f?p=&APP_ID.:19:&SESSION.::&DEBUG.:RP:P19_RM_FIN_DATE,P19_RM_FIN_EMP_ID:,&success_msg=#SUCCESS_MSG#'
+,p_branch_point=>'AFTER_PROCESSING'
+,p_branch_type=>'REDIRECT_URL'
+,p_branch_when_button_id=>wwv_flow_api.id(79908872011916219)
+,p_branch_sequence=>10
 );
 wwv_flow_api.create_page_item(
  p_id=>wwv_flow_api.id(79907223701916203)
@@ -179,6 +200,7 @@ wwv_flow_api.create_page_item(
 ,p_item_sequence=>10
 ,p_item_plug_id=>wwv_flow_api.id(66647506350304424)
 ,p_item_source_plug_id=>wwv_flow_api.id(79907042588916201)
+,p_item_default=>'0'
 ,p_prompt=>'Acd Total Offered'
 ,p_source=>'ACD_TOTAL_OFFERED'
 ,p_source_type=>'REGION_SOURCE_COLUMN'
@@ -196,6 +218,7 @@ wwv_flow_api.create_page_item(
 ,p_item_sequence=>20
 ,p_item_plug_id=>wwv_flow_api.id(66647506350304424)
 ,p_item_source_plug_id=>wwv_flow_api.id(79907042588916201)
+,p_item_default=>'0'
 ,p_prompt=>'Acd Total Answered'
 ,p_source=>'ACD_TOTAL_ANSWERED'
 ,p_source_type=>'REGION_SOURCE_COLUMN'
@@ -213,6 +236,7 @@ wwv_flow_api.create_page_item(
 ,p_item_sequence=>30
 ,p_item_plug_id=>wwv_flow_api.id(66647506350304424)
 ,p_item_source_plug_id=>wwv_flow_api.id(79907042588916201)
+,p_item_default=>'0'
 ,p_prompt=>'Acd In Queue'
 ,p_source=>'ACD_IN_QUEUE'
 ,p_source_type=>'REGION_SOURCE_COLUMN'
@@ -230,6 +254,7 @@ wwv_flow_api.create_page_item(
 ,p_item_sequence=>40
 ,p_item_plug_id=>wwv_flow_api.id(66647506350304424)
 ,p_item_source_plug_id=>wwv_flow_api.id(79907042588916201)
+,p_item_default=>'0'
 ,p_prompt=>'Acd Avg Queue Time'
 ,p_source=>'ACD_AVG_QUEUE_TIME'
 ,p_source_type=>'REGION_SOURCE_COLUMN'
@@ -247,6 +272,7 @@ wwv_flow_api.create_page_item(
 ,p_item_sequence=>50
 ,p_item_plug_id=>wwv_flow_api.id(66647506350304424)
 ,p_item_source_plug_id=>wwv_flow_api.id(79907042588916201)
+,p_item_default=>'0'
 ,p_prompt=>'Acd Avg Queue Sec'
 ,p_source=>'ACD_AVG_QUEUE_SEC'
 ,p_source_type=>'REGION_SOURCE_COLUMN'
@@ -265,6 +291,7 @@ wwv_flow_api.create_page_item(
 ,p_item_sequence=>10
 ,p_item_plug_id=>wwv_flow_api.id(66647784914304426)
 ,p_item_source_plug_id=>wwv_flow_api.id(79907042588916201)
+,p_item_default=>'0'
 ,p_prompt=>'Gr Std In Door'
 ,p_source=>'GR_STD_IN_DOOR'
 ,p_source_type=>'REGION_SOURCE_COLUMN'
@@ -282,6 +309,7 @@ wwv_flow_api.create_page_item(
 ,p_item_sequence=>20
 ,p_item_plug_id=>wwv_flow_api.id(66647784914304426)
 ,p_item_source_plug_id=>wwv_flow_api.id(79907042588916201)
+,p_item_default=>'0'
 ,p_prompt=>'Gr Avg Wait Time'
 ,p_source=>'GR_AVG_WAIT_TIME'
 ,p_source_type=>'REGION_SOURCE_COLUMN'
@@ -299,6 +327,7 @@ wwv_flow_api.create_page_item(
 ,p_item_sequence=>30
 ,p_item_plug_id=>wwv_flow_api.id(66647784914304426)
 ,p_item_source_plug_id=>wwv_flow_api.id(79907042588916201)
+,p_item_default=>'0'
 ,p_prompt=>'Gr Avg Wait Sec'
 ,p_source=>'GR_AVG_WAIT_SEC'
 ,p_source_type=>'REGION_SOURCE_COLUMN'
@@ -317,6 +346,7 @@ wwv_flow_api.create_page_item(
 ,p_item_sequence=>10
 ,p_item_plug_id=>wwv_flow_api.id(66647689668304425)
 ,p_item_source_plug_id=>wwv_flow_api.id(79907042588916201)
+,p_item_default=>'0'
 ,p_prompt=>'Finaid Received'
 ,p_source=>'FINAID_RECEIVED'
 ,p_source_type=>'REGION_SOURCE_COLUMN'
@@ -334,6 +364,7 @@ wwv_flow_api.create_page_item(
 ,p_item_sequence=>120
 ,p_item_plug_id=>wwv_flow_api.id(79907042588916201)
 ,p_item_source_plug_id=>wwv_flow_api.id(79907042588916201)
+,p_item_default=>'0'
 ,p_prompt=>'Hw Phone'
 ,p_source=>'HW_PHONE'
 ,p_source_type=>'REGION_SOURCE_COLUMN'
@@ -351,6 +382,7 @@ wwv_flow_api.create_page_item(
 ,p_item_sequence=>130
 ,p_item_plug_id=>wwv_flow_api.id(79907042588916201)
 ,p_item_source_plug_id=>wwv_flow_api.id(79907042588916201)
+,p_item_default=>'0'
 ,p_prompt=>'Hw Acd'
 ,p_source=>'HW_ACD'
 ,p_source_type=>'REGION_SOURCE_COLUMN'
@@ -440,6 +472,19 @@ wwv_flow_api.create_page_process(
 ''))
 ,p_error_display_location=>'INLINE_IN_NOTIFICATION'
 ,p_process_success_message=>'Successfully Submitted'
+);
+wwv_flow_api.create_page_process(
+ p_id=>wwv_flow_api.id(79908777902916218)
+,p_process_sequence=>20
+,p_process_point=>'AFTER_SUBMIT'
+,p_process_type=>'NATIVE_PLSQL'
+,p_process_name=>'DELETE_ACD_FIN'
+,p_process_sql_clob=>wwv_flow_string.join(wwv_flow_t_varchar2(
+'DELETE FROM REC_MANG_ACD_FIN',
+'WHERE RM_FIN_DATE = :P19_RM_FIN_DATE',
+'  AND RM_FIN_EMP_ID = :P19_RM_FIN_EMP_ID;'))
+,p_error_display_location=>'INLINE_IN_NOTIFICATION'
+,p_process_when_button_id=>wwv_flow_api.id(79908872011916219)
 );
 wwv_flow_api.create_page_process(
  p_id=>wwv_flow_api.id(79907102872916202)
