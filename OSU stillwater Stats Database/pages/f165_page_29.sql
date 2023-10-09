@@ -27,7 +27,7 @@ prompt APPLICATION 165 - OSU - Stillwater Stats Database
 -- Application Export:
 --   Application:     165
 --   Name:            OSU - Stillwater Stats Database
---   Date and Time:   15:28 Thursday October 5, 2023
+--   Date and Time:   15:42 Monday October 9, 2023
 --   Exported By:     XCHEN
 --   Flashback:       0
 --   Export Type:     Page Export
@@ -45,13 +45,13 @@ begin
 wwv_flow_api.create_page(
  p_id=>29
 ,p_user_interface_id=>wwv_flow_api.id(56761143659843755)
-,p_name=>'FC Goto Specific data _ Chen version'
+,p_name=>'Data entry file room Specific date'
 ,p_step_title=>'FC Goto Specific data _ Chen version'
 ,p_autocomplete_on_off=>'OFF'
 ,p_page_template_options=>'#DEFAULT#'
 ,p_protection_level=>'C'
 ,p_last_updated_by=>'XCHEN'
-,p_last_upd_yyyymmddhh24miss=>'20231005152758'
+,p_last_upd_yyyymmddhh24miss=>'20231009152124'
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(79365509997193109)
@@ -75,7 +75,7 @@ wwv_flow_api.create_page_plug(
 ,p_plug_new_grid_column=>false
 ,p_plug_display_point=>'BODY'
 ,p_query_type=>'TABLE'
-,p_query_table=>'FRONTCOUNS'
+,p_query_table=>'REC_MANG_DE_FR'
 ,p_query_where=>'ENTER_DATE = :P29_DATE'
 ,p_include_rowid_column=>false
 ,p_plug_source_type=>'NATIVE_IR'
@@ -94,7 +94,7 @@ wwv_flow_api.create_worksheet(
 ,p_report_list_mode=>'TABS'
 ,p_show_detail_link=>'C'
 ,p_download_formats=>'CSV:HTML:EMAIL:XLS:PDF:RTF'
-,p_detail_link=>'f?p=&APP_ID.:3:&SESSION.::&DEBUG.:RP:P3_ENTER_DATE,P3_FC_EMP_ID:#ENTER_DATE#,#FC_EMP_ID##ROWID#\'
+,p_detail_link=>'f?p=&APP_ID.:18:&SESSION.::&DEBUG.:RP:P18_ENTER_DATE,P18_RM_DE_EMP_ID:#ENTER_DATE#,#RM_DE_EMP_ID##FC_EMP_ID##ROWID#\'
 ,p_detail_link_text=>'<span aria-label="Edit"><span class="fa fa-edit" aria-hidden="true" title="Edit"></span></span>'
 ,p_owner=>'XCHEN'
 ,p_internal_uid=>79457150037135035
@@ -110,234 +110,84 @@ wwv_flow_api.create_worksheet_column(
 ,p_tz_dependent=>'N'
 );
 wwv_flow_api.create_worksheet_column(
- p_id=>wwv_flow_api.id(79457926969135047)
-,p_db_column_name=>'FC_EMP_ID'
-,p_display_order=>3
-,p_column_identifier=>'C'
-,p_column_label=>'Fc Emp Id'
-,p_column_type=>'STRING'
-,p_heading_alignment=>'LEFT'
-,p_tz_dependent=>'N'
-);
-wwv_flow_api.create_worksheet_column(
- p_id=>wwv_flow_api.id(79458390547135047)
-,p_db_column_name=>'COUNS_PHONE'
-,p_display_order=>4
-,p_column_identifier=>'D'
-,p_column_label=>'Couns Phone'
-,p_column_type=>'NUMBER'
-,p_heading_alignment=>'RIGHT'
-,p_column_alignment=>'RIGHT'
-,p_tz_dependent=>'N'
-);
-wwv_flow_api.create_worksheet_column(
- p_id=>wwv_flow_api.id(79458720376135047)
-,p_db_column_name=>'ACD'
-,p_display_order=>5
-,p_column_identifier=>'E'
-,p_column_label=>'Acd'
-,p_column_type=>'NUMBER'
-,p_heading_alignment=>'RIGHT'
-,p_column_alignment=>'RIGHT'
-,p_tz_dependent=>'N'
-);
-wwv_flow_api.create_worksheet_column(
- p_id=>wwv_flow_api.id(79459185439135048)
-,p_db_column_name=>'IN_PERSON'
-,p_display_order=>6
-,p_column_identifier=>'F'
-,p_column_label=>'In Person'
-,p_column_type=>'NUMBER'
-,p_heading_alignment=>'RIGHT'
-,p_column_alignment=>'RIGHT'
-,p_tz_dependent=>'N'
-);
-wwv_flow_api.create_worksheet_column(
- p_id=>wwv_flow_api.id(79459539659135048)
-,p_db_column_name=>'NOT_SIGNED_IN'
-,p_display_order=>7
-,p_column_identifier=>'G'
-,p_column_label=>'Not Signed In'
-,p_column_type=>'NUMBER'
-,p_heading_alignment=>'RIGHT'
-,p_column_alignment=>'RIGHT'
-,p_tz_dependent=>'N'
-);
-wwv_flow_api.create_worksheet_column(
- p_id=>wwv_flow_api.id(79459975440135048)
-,p_db_column_name=>'EMAILIN'
-,p_display_order=>8
-,p_column_identifier=>'H'
-,p_column_label=>'Emailin'
-,p_column_type=>'NUMBER'
-,p_heading_alignment=>'RIGHT'
-,p_column_alignment=>'RIGHT'
-,p_tz_dependent=>'N'
-);
-wwv_flow_api.create_worksheet_column(
- p_id=>wwv_flow_api.id(79460391949135048)
-,p_db_column_name=>'EMAILOUT'
-,p_display_order=>9
-,p_column_identifier=>'I'
-,p_column_label=>'Emailout'
-,p_column_type=>'NUMBER'
-,p_heading_alignment=>'RIGHT'
-,p_column_alignment=>'RIGHT'
-,p_tz_dependent=>'N'
-);
-wwv_flow_api.create_worksheet_column(
- p_id=>wwv_flow_api.id(79460785938135048)
-,p_db_column_name=>'CERT'
-,p_display_order=>10
-,p_column_identifier=>'J'
-,p_column_label=>'Cert'
-,p_column_type=>'NUMBER'
-,p_heading_alignment=>'RIGHT'
-,p_column_alignment=>'RIGHT'
-,p_tz_dependent=>'N'
-);
-wwv_flow_api.create_worksheet_column(
- p_id=>wwv_flow_api.id(79461152357135049)
-,p_db_column_name=>'STL'
-,p_display_order=>11
-,p_column_identifier=>'K'
-,p_column_label=>'Stl'
-,p_column_type=>'NUMBER'
-,p_heading_alignment=>'RIGHT'
-,p_column_alignment=>'RIGHT'
-,p_tz_dependent=>'N'
-);
-wwv_flow_api.create_worksheet_column(
- p_id=>wwv_flow_api.id(79461551352135049)
-,p_db_column_name=>'REPORTS'
+ p_id=>wwv_flow_api.id(80215880113236311)
+,p_db_column_name=>'RM_DE_EMP_ID'
 ,p_display_order=>12
-,p_column_identifier=>'L'
-,p_column_label=>'Reports'
-,p_column_type=>'NUMBER'
-,p_heading_alignment=>'RIGHT'
-,p_column_alignment=>'RIGHT'
-,p_tz_dependent=>'N'
+,p_column_identifier=>'X'
+,p_column_label=>'Rm De Emp Id'
+,p_column_type=>'STRING'
 );
 wwv_flow_api.create_worksheet_column(
- p_id=>wwv_flow_api.id(79461910832135049)
-,p_db_column_name=>'MISC'
-,p_display_order=>13
-,p_column_identifier=>'M'
-,p_column_label=>'Misc'
-,p_column_type=>'NUMBER'
-,p_heading_alignment=>'RIGHT'
-,p_column_alignment=>'RIGHT'
-,p_tz_dependent=>'N'
-);
-wwv_flow_api.create_worksheet_column(
- p_id=>wwv_flow_api.id(79462303243135049)
-,p_db_column_name=>'EVALS'
-,p_display_order=>14
-,p_column_identifier=>'N'
-,p_column_label=>'Evals'
-,p_column_type=>'NUMBER'
-,p_heading_alignment=>'RIGHT'
-,p_column_alignment=>'RIGHT'
-,p_tz_dependent=>'N'
-);
-wwv_flow_api.create_worksheet_column(
- p_id=>wwv_flow_api.id(79462763032135050)
-,p_db_column_name=>'PJ'
-,p_display_order=>15
-,p_column_identifier=>'O'
-,p_column_label=>'Pj'
-,p_column_type=>'NUMBER'
-,p_heading_alignment=>'RIGHT'
-,p_column_alignment=>'RIGHT'
-,p_tz_dependent=>'N'
-);
-wwv_flow_api.create_worksheet_column(
- p_id=>wwv_flow_api.id(79463128808135050)
-,p_db_column_name=>'CURR_HS'
-,p_display_order=>16
-,p_column_identifier=>'P'
-,p_column_label=>'Curr Hs'
-,p_column_type=>'NUMBER'
-,p_heading_alignment=>'RIGHT'
-,p_column_alignment=>'RIGHT'
-,p_tz_dependent=>'N'
-);
-wwv_flow_api.create_worksheet_column(
- p_id=>wwv_flow_api.id(79463504776135050)
-,p_db_column_name=>'INC_TRANSFER'
-,p_display_order=>17
-,p_column_identifier=>'Q'
-,p_column_label=>'Inc Transfer'
-,p_column_type=>'NUMBER'
-,p_heading_alignment=>'RIGHT'
-,p_column_alignment=>'RIGHT'
-,p_tz_dependent=>'N'
-);
-wwv_flow_api.create_worksheet_column(
- p_id=>wwv_flow_api.id(79463976513135050)
-,p_db_column_name=>'INC_GRAD'
-,p_display_order=>18
-,p_column_identifier=>'R'
-,p_column_label=>'Inc Grad'
-,p_column_type=>'NUMBER'
-,p_heading_alignment=>'RIGHT'
-,p_column_alignment=>'RIGHT'
-,p_tz_dependent=>'N'
-);
-wwv_flow_api.create_worksheet_column(
- p_id=>wwv_flow_api.id(79464312342135051)
-,p_db_column_name=>'CURR_UG'
-,p_display_order=>19
-,p_column_identifier=>'S'
-,p_column_label=>'Curr Ug'
-,p_column_type=>'NUMBER'
-,p_heading_alignment=>'RIGHT'
-,p_column_alignment=>'RIGHT'
-,p_tz_dependent=>'N'
-);
-wwv_flow_api.create_worksheet_column(
- p_id=>wwv_flow_api.id(79464725604135051)
-,p_db_column_name=>'MED'
-,p_display_order=>20
-,p_column_identifier=>'T'
-,p_column_label=>'Med'
-,p_column_type=>'NUMBER'
-,p_heading_alignment=>'RIGHT'
-,p_column_alignment=>'RIGHT'
-,p_tz_dependent=>'N'
-);
-wwv_flow_api.create_worksheet_column(
- p_id=>wwv_flow_api.id(79465134093135051)
-,p_db_column_name=>'COMBO'
-,p_display_order=>21
-,p_column_identifier=>'U'
-,p_column_label=>'Combo'
-,p_column_type=>'NUMBER'
-,p_heading_alignment=>'RIGHT'
-,p_column_alignment=>'RIGHT'
-,p_tz_dependent=>'N'
-);
-wwv_flow_api.create_worksheet_column(
- p_id=>wwv_flow_api.id(79465509257135052)
-,p_db_column_name=>'FOR_STU'
+ p_id=>wwv_flow_api.id(80215919222236312)
+,p_db_column_name=>'RM_DE_ISIR'
 ,p_display_order=>22
-,p_column_identifier=>'V'
-,p_column_label=>'For Stu'
+,p_column_identifier=>'Y'
+,p_column_label=>'Rm De Isir'
 ,p_column_type=>'NUMBER'
-,p_heading_alignment=>'RIGHT'
 ,p_column_alignment=>'RIGHT'
-,p_tz_dependent=>'N'
 );
 wwv_flow_api.create_worksheet_column(
- p_id=>wwv_flow_api.id(79465977082135052)
-,p_db_column_name=>'ROUTED'
-,p_display_order=>23
-,p_column_identifier=>'W'
-,p_column_label=>'Routed'
+ p_id=>wwv_flow_api.id(80216079242236313)
+,p_db_column_name=>'RM_DE_MIL'
+,p_display_order=>32
+,p_column_identifier=>'Z'
+,p_column_label=>'Rm De Mil'
 ,p_column_type=>'NUMBER'
-,p_heading_alignment=>'RIGHT'
 ,p_column_alignment=>'RIGHT'
-,p_tz_dependent=>'N'
+);
+wwv_flow_api.create_worksheet_column(
+ p_id=>wwv_flow_api.id(80216155455236314)
+,p_db_column_name=>'RM_DE_AWARD'
+,p_display_order=>42
+,p_column_identifier=>'AA'
+,p_column_label=>'Rm De Award'
+,p_column_type=>'NUMBER'
+,p_column_alignment=>'RIGHT'
+);
+wwv_flow_api.create_worksheet_column(
+ p_id=>wwv_flow_api.id(80216260477236315)
+,p_db_column_name=>'RM_DE_TRK_STAT'
+,p_display_order=>52
+,p_column_identifier=>'AB'
+,p_column_label=>'Rm De Trk Stat'
+,p_column_type=>'NUMBER'
+,p_column_alignment=>'RIGHT'
+);
+wwv_flow_api.create_worksheet_column(
+ p_id=>wwv_flow_api.id(80216392786236316)
+,p_db_column_name=>'FR_APPOINTMENTS'
+,p_display_order=>62
+,p_column_identifier=>'AC'
+,p_column_label=>'Fr Appointments'
+,p_column_type=>'NUMBER'
+,p_column_alignment=>'RIGHT'
+);
+wwv_flow_api.create_worksheet_column(
+ p_id=>wwv_flow_api.id(80216495981236317)
+,p_db_column_name=>'FR_LTRS_MAILED'
+,p_display_order=>72
+,p_column_identifier=>'AD'
+,p_column_label=>'Fr Ltrs Mailed'
+,p_column_type=>'NUMBER'
+,p_column_alignment=>'RIGHT'
+);
+wwv_flow_api.create_worksheet_column(
+ p_id=>wwv_flow_api.id(80216541926236318)
+,p_db_column_name=>'FR_DOC_SCAN'
+,p_display_order=>82
+,p_column_identifier=>'AE'
+,p_column_label=>'Fr Doc Scan'
+,p_column_type=>'NUMBER'
+,p_column_alignment=>'RIGHT'
+);
+wwv_flow_api.create_worksheet_column(
+ p_id=>wwv_flow_api.id(80216687402236319)
+,p_db_column_name=>'FR_FAXIN'
+,p_display_order=>92
+,p_column_identifier=>'AF'
+,p_column_label=>'Fr Faxin'
+,p_column_type=>'NUMBER'
+,p_column_alignment=>'RIGHT'
 );
 wwv_flow_api.create_worksheet_rpt(
  p_id=>wwv_flow_api.id(79466939243136865)
@@ -346,7 +196,7 @@ wwv_flow_api.create_worksheet_rpt(
 ,p_report_alias=>'794670'
 ,p_status=>'PUBLIC'
 ,p_is_default=>'Y'
-,p_report_columns=>'ENTER_DATE:FC_EMP_ID:COUNS_PHONE:ACD:IN_PERSON:NOT_SIGNED_IN:EMAILIN:EMAILOUT:CERT:STL:REPORTS:MISC:EVALS:PJ:CURR_HS:INC_TRANSFER:INC_GRAD:CURR_UG:MED:COMBO:FOR_STU:ROUTED'
+,p_report_columns=>'ENTER_DATE:RM_DE_EMP_ID:RM_DE_ISIR:RM_DE_MIL:RM_DE_AWARD:RM_DE_TRK_STAT:FR_APPOINTMENTS:FR_LTRS_MAILED:FR_DOC_SCAN:FR_FAXIN'
 );
 wwv_flow_api.create_page_button(
  p_id=>wwv_flow_api.id(79521136750422746)
