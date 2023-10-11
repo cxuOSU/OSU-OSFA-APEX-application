@@ -27,7 +27,7 @@ prompt APPLICATION 165 - OSU - Stillwater Stats Database
 -- Application Export:
 --   Application:     165
 --   Name:            OSU - Stillwater Stats Database
---   Date and Time:   15:24 Thursday October 5, 2023
+--   Date and Time:   16:50 Wednesday October 11, 2023
 --   Exported By:     XCHEN
 --   Flashback:       0
 --   Export Type:     Page Export
@@ -51,11 +51,25 @@ wwv_flow_api.create_page(
 ,p_css_file_urls=>'#APP_IMAGES#main.css'
 ,p_page_template_options=>'#DEFAULT#'
 ,p_last_updated_by=>'XCHEN'
-,p_last_upd_yyyymmddhh24miss=>'20231005143002'
+,p_last_upd_yyyymmddhh24miss=>'20231011151634'
+);
+wwv_flow_api.create_page_plug(
+ p_id=>wwv_flow_api.id(80420368499594611)
+,p_plug_name=>'Container'
+,p_region_template_options=>'#DEFAULT#:t-Region--removeHeader:t-Region--noUI:t-Region--scrollBody'
+,p_plug_template=>wwv_flow_api.id(56680630296843656)
+,p_plug_display_sequence=>20
+,p_include_in_reg_disp_sel_yn=>'Y'
+,p_plug_new_grid_row=>false
+,p_plug_new_grid_column=>false
+,p_plug_display_point=>'BODY'
+,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
+,p_attribute_01=>'N'
+,p_attribute_02=>'HTML'
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(338836306848247430)
-,p_plug_name=>'Front Counselors'
+,p_plug_name=>'Front Counselors - Client Service'
 ,p_region_template_options=>'#DEFAULT#:t-Region--noUI:t-Region--scrollBody:t-Form--labelsAbove'
 ,p_plug_template=>wwv_flow_api.id(56680630296843656)
 ,p_plug_display_sequence=>10
@@ -73,7 +87,7 @@ wwv_flow_api.create_page_plug(
 ,p_plug_name=>'Finaid Emails Answered'
 ,p_region_template_options=>'#DEFAULT#:t-Region--noUI:t-Region--scrollBody'
 ,p_plug_template=>wwv_flow_api.id(56680630296843656)
-,p_plug_display_sequence=>20
+,p_plug_display_sequence=>30
 ,p_plug_new_grid_row=>false
 ,p_plug_display_point=>'BODY'
 ,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
@@ -81,33 +95,45 @@ wwv_flow_api.create_page_plug(
 ,p_attribute_02=>'HTML'
 );
 wwv_flow_api.create_page_button(
+ p_id=>wwv_flow_api.id(80217459501236327)
+,p_button_sequence=>20
+,p_button_plug_id=>wwv_flow_api.id(80420368499594611)
+,p_button_name=>'SPECIFICDATE'
+,p_button_action=>'REDIRECT_PAGE'
+,p_button_template_options=>'#DEFAULT#:t-Button--large:t-Button--link'
+,p_button_template_id=>wwv_flow_api.id(56738600440843712)
+,p_button_image_alt=>'Go to Specific Date'
+,p_button_position=>'REGION_TEMPLATE_CLOSE'
+,p_button_redirect_url=>'f?p=&APP_ID.:7:&SESSION.::&DEBUG.:RP::'
+);
+wwv_flow_api.create_page_button(
+ p_id=>wwv_flow_api.id(79586160332980727)
+,p_button_sequence=>10
+,p_button_plug_id=>wwv_flow_api.id(80420368499594611)
+,p_button_name=>'DELETE'
+,p_button_action=>'REDIRECT_URL'
+,p_button_template_options=>'#DEFAULT#'
+,p_button_template_id=>wwv_flow_api.id(56738600440843712)
+,p_button_image_alt=>'Delete'
+,p_button_position=>'REGION_TEMPLATE_CREATE'
+,p_button_redirect_url=>'javascript:apex.confirm(''Are you sure you want to delete this record?'',DELETE'');'
+);
+wwv_flow_api.create_page_button(
  p_id=>wwv_flow_api.id(56819108312700714)
 ,p_button_sequence=>20
-,p_button_plug_id=>wwv_flow_api.id(338836306848247430)
-,p_button_name=>'Submit'
+,p_button_plug_id=>wwv_flow_api.id(338837868839247446)
+,p_button_name=>'SUBMIT'
 ,p_button_action=>'SUBMIT'
 ,p_button_template_options=>'#DEFAULT#:t-Button--large'
 ,p_button_template_id=>wwv_flow_api.id(56738600440843712)
 ,p_button_is_hot=>'Y'
 ,p_button_image_alt=>'Create / Update'
-,p_button_position=>'REGION_TEMPLATE_CLOSE'
-,p_database_action=>'INSERT'
-);
-wwv_flow_api.create_page_button(
- p_id=>wwv_flow_api.id(79586160332980727)
-,p_button_sequence=>10
-,p_button_plug_id=>wwv_flow_api.id(338836306848247430)
-,p_button_name=>'Delete'
-,p_button_action=>'SUBMIT'
-,p_button_template_options=>'#DEFAULT#'
-,p_button_template_id=>wwv_flow_api.id(56738600440843712)
-,p_button_image_alt=>'Delete'
 ,p_button_position=>'REGION_TEMPLATE_CREATE'
-,p_warn_on_unsaved_changes=>null
+,p_database_action=>'INSERT'
 );
 wwv_flow_api.create_page_branch(
  p_id=>wwv_flow_api.id(79586552308980731)
-,p_branch_name=>'After Delete'
+,p_branch_name=>'AFTER_DELETE'
 ,p_branch_action=>'f?p=&APP_ID.:3:&SESSION.::&DEBUG.:RP:P3_ENTER_DATE,P3_FC_EMP_ID:,&success_msg=#SUCCESS_MSG#'
 ,p_branch_point=>'AFTER_PROCESSING'
 ,p_branch_type=>'REDIRECT_URL'
@@ -118,10 +144,13 @@ wwv_flow_api.create_page_item(
  p_id=>wwv_flow_api.id(79521484520422749)
 ,p_name=>'P3_ENTER_DATE'
 ,p_source_data_type=>'DATE'
+,p_is_required=>true
 ,p_is_primary_key=>true
 ,p_item_sequence=>10
 ,p_item_plug_id=>wwv_flow_api.id(338836306848247430)
 ,p_item_source_plug_id=>wwv_flow_api.id(338836306848247430)
+,p_item_default=>'sysdate'
+,p_item_default_type=>'PLSQL_EXPRESSION'
 ,p_prompt=>'Date'
 ,p_source=>'ENTER_DATE'
 ,p_source_type=>'REGION_SOURCE_COLUMN'
@@ -138,11 +167,12 @@ wwv_flow_api.create_page_item(
  p_id=>wwv_flow_api.id(79521558684422750)
 ,p_name=>'P3_FC_EMP_ID'
 ,p_source_data_type=>'VARCHAR2'
+,p_is_required=>true
 ,p_is_primary_key=>true
 ,p_item_sequence=>40
 ,p_item_plug_id=>wwv_flow_api.id(338836306848247430)
 ,p_item_source_plug_id=>wwv_flow_api.id(338836306848247430)
-,p_prompt=>'Emp Name'
+,p_prompt=>'Emp ID'
 ,p_source=>'FC_EMP_ID'
 ,p_source_type=>'REGION_SOURCE_COLUMN'
 ,p_display_as=>'NATIVE_SELECT_LIST'
@@ -281,7 +311,7 @@ wwv_flow_api.create_page_item(
 ,p_item_plug_id=>wwv_flow_api.id(338836306848247430)
 ,p_item_source_plug_id=>wwv_flow_api.id(338836306848247430)
 ,p_item_default=>'0'
-,p_prompt=>'Cert'
+,p_prompt=>'Cert.'
 ,p_source=>'CERT'
 ,p_source_type=>'REGION_SOURCE_COLUMN'
 ,p_display_as=>'NATIVE_NUMBER_FIELD'
@@ -354,8 +384,8 @@ wwv_flow_api.create_page_item(
  p_id=>wwv_flow_api.id(79584568195980711)
 ,p_name=>'P3_EVALS'
 ,p_source_data_type=>'NUMBER'
-,p_item_sequence=>130
-,p_item_plug_id=>wwv_flow_api.id(338836306848247430)
+,p_item_sequence=>10
+,p_item_plug_id=>wwv_flow_api.id(80420368499594611)
 ,p_item_source_plug_id=>wwv_flow_api.id(338836306848247430)
 ,p_item_default=>'0'
 ,p_prompt=>'Evals'
@@ -364,7 +394,6 @@ wwv_flow_api.create_page_item(
 ,p_display_as=>'NATIVE_NUMBER_FIELD'
 ,p_cSize=>30
 ,p_begin_on_new_line=>'N'
-,p_begin_on_new_field=>'N'
 ,p_field_template=>wwv_flow_api.id(56737573338843710)
 ,p_item_template_options=>'#DEFAULT#'
 ,p_is_persistent=>'N'
@@ -374,8 +403,8 @@ wwv_flow_api.create_page_item(
  p_id=>wwv_flow_api.id(79584692822980712)
 ,p_name=>'P3_PJ'
 ,p_source_data_type=>'NUMBER'
-,p_item_sequence=>160
-,p_item_plug_id=>wwv_flow_api.id(338836306848247430)
+,p_item_sequence=>20
+,p_item_plug_id=>wwv_flow_api.id(80420368499594611)
 ,p_item_source_plug_id=>wwv_flow_api.id(338836306848247430)
 ,p_item_default=>'0'
 ,p_prompt=>'Prof Judg'
@@ -383,6 +412,7 @@ wwv_flow_api.create_page_item(
 ,p_source_type=>'REGION_SOURCE_COLUMN'
 ,p_display_as=>'NATIVE_NUMBER_FIELD'
 ,p_cSize=>30
+,p_begin_on_new_line=>'N'
 ,p_field_template=>wwv_flow_api.id(56737573338843710)
 ,p_item_template_options=>'#DEFAULT#'
 ,p_is_persistent=>'N'
@@ -396,7 +426,7 @@ wwv_flow_api.create_page_item(
 ,p_item_plug_id=>wwv_flow_api.id(338837868839247446)
 ,p_item_source_plug_id=>wwv_flow_api.id(338836306848247430)
 ,p_item_default=>'0'
-,p_prompt=>'Current H.S.'
+,p_prompt=>'Current HS or Incoming FR'
 ,p_source=>'CURR_HS'
 ,p_source_type=>'REGION_SOURCE_COLUMN'
 ,p_display_as=>'NATIVE_NUMBER_FIELD'
@@ -410,11 +440,11 @@ wwv_flow_api.create_page_item(
  p_id=>wwv_flow_api.id(79584806814980714)
 ,p_name=>'P3_INC_TRANSFER'
 ,p_source_data_type=>'NUMBER'
-,p_item_sequence=>50
+,p_item_sequence=>60
 ,p_item_plug_id=>wwv_flow_api.id(338837868839247446)
 ,p_item_source_plug_id=>wwv_flow_api.id(338836306848247430)
 ,p_item_default=>'0'
-,p_prompt=>'Inc Transfer'
+,p_prompt=>'Incoming Undergrad TR'
 ,p_source=>'INC_TRANSFER'
 ,p_source_type=>'REGION_SOURCE_COLUMN'
 ,p_display_as=>'NATIVE_NUMBER_FIELD'
@@ -433,7 +463,7 @@ wwv_flow_api.create_page_item(
 ,p_item_plug_id=>wwv_flow_api.id(338837868839247446)
 ,p_item_source_plug_id=>wwv_flow_api.id(338836306848247430)
 ,p_item_default=>'0'
-,p_prompt=>'Incoming Grad'
+,p_prompt=>'Incoming Grad or Vet Med'
 ,p_source=>'INC_GRAD'
 ,p_source_type=>'REGION_SOURCE_COLUMN'
 ,p_display_as=>'NATIVE_NUMBER_FIELD'
@@ -449,11 +479,11 @@ wwv_flow_api.create_page_item(
  p_id=>wwv_flow_api.id(79585076862980716)
 ,p_name=>'P3_CURR_UG'
 ,p_source_data_type=>'NUMBER'
-,p_item_sequence=>30
+,p_item_sequence=>70
 ,p_item_plug_id=>wwv_flow_api.id(338837868839247446)
 ,p_item_source_plug_id=>wwv_flow_api.id(338836306848247430)
 ,p_item_default=>'0'
-,p_prompt=>'Current UG'
+,p_prompt=>'Current Undergrad'
 ,p_source=>'CURR_UG'
 ,p_source_type=>'REGION_SOURCE_COLUMN'
 ,p_display_as=>'NATIVE_NUMBER_FIELD'
@@ -469,11 +499,11 @@ wwv_flow_api.create_page_item(
  p_id=>wwv_flow_api.id(79585126854980717)
 ,p_name=>'P3_MED'
 ,p_source_data_type=>'NUMBER'
-,p_item_sequence=>60
+,p_item_sequence=>30
 ,p_item_plug_id=>wwv_flow_api.id(338837868839247446)
 ,p_item_source_plug_id=>wwv_flow_api.id(338836306848247430)
 ,p_item_default=>'0'
-,p_prompt=>'Grad/Vet Med'
+,p_prompt=>'Current Grad or Vet Med'
 ,p_source=>'MED'
 ,p_source_type=>'REGION_SOURCE_COLUMN'
 ,p_display_as=>'NATIVE_NUMBER_FIELD'
@@ -489,11 +519,11 @@ wwv_flow_api.create_page_item(
  p_id=>wwv_flow_api.id(79585277610980718)
 ,p_name=>'P3_COMBO'
 ,p_source_data_type=>'NUMBER'
-,p_item_sequence=>70
+,p_item_sequence=>80
 ,p_item_plug_id=>wwv_flow_api.id(338837868839247446)
 ,p_item_source_plug_id=>wwv_flow_api.id(338836306848247430)
 ,p_item_default=>'0'
-,p_prompt=>'Combo/Other'
+,p_prompt=>'Combination of Students / Other'
 ,p_source=>'COMBO'
 ,p_source_type=>'REGION_SOURCE_COLUMN'
 ,p_display_as=>'NATIVE_NUMBER_FIELD'
@@ -513,7 +543,7 @@ wwv_flow_api.create_page_item(
 ,p_item_plug_id=>wwv_flow_api.id(338837868839247446)
 ,p_item_source_plug_id=>wwv_flow_api.id(338836306848247430)
 ,p_item_default=>'0'
-,p_prompt=>'Former Stud'
+,p_prompt=>'Former Student'
 ,p_source=>'FOR_STU'
 ,p_source_type=>'REGION_SOURCE_COLUMN'
 ,p_display_as=>'NATIVE_NUMBER_FIELD'
@@ -529,19 +559,43 @@ wwv_flow_api.create_page_item(
  p_id=>wwv_flow_api.id(79585403382980720)
 ,p_name=>'P3_ROUTED'
 ,p_source_data_type=>'NUMBER'
-,p_item_sequence=>80
+,p_item_sequence=>50
 ,p_item_plug_id=>wwv_flow_api.id(338837868839247446)
 ,p_item_source_plug_id=>wwv_flow_api.id(338836306848247430)
 ,p_item_default=>'0'
-,p_prompt=>'Routed'
+,p_prompt=>'Finaid Email Routed'
 ,p_source=>'ROUTED'
 ,p_source_type=>'REGION_SOURCE_COLUMN'
 ,p_display_as=>'NATIVE_NUMBER_FIELD'
 ,p_cSize=>30
+,p_begin_on_new_line=>'N'
+,p_begin_on_new_field=>'N'
 ,p_field_template=>wwv_flow_api.id(56737573338843710)
 ,p_item_template_options=>'#DEFAULT#'
 ,p_is_persistent=>'N'
 ,p_attribute_03=>'right'
+);
+wwv_flow_api.create_page_item(
+ p_id=>wwv_flow_api.id(80420486084594612)
+,p_name=>'P3_NOTE'
+,p_source_data_type=>'VARCHAR2'
+,p_item_sequence=>90
+,p_item_plug_id=>wwv_flow_api.id(338837868839247446)
+,p_item_source_plug_id=>wwv_flow_api.id(338836306848247430)
+,p_prompt=>'Note'
+,p_source=>'NOTE'
+,p_source_type=>'REGION_SOURCE_COLUMN'
+,p_display_as=>'NATIVE_TEXTAREA'
+,p_cSize=>30
+,p_cMaxlength=>400
+,p_cHeight=>5
+,p_field_template=>wwv_flow_api.id(56737573338843710)
+,p_item_template_options=>'#DEFAULT#'
+,p_is_persistent=>'N'
+,p_attribute_01=>'Y'
+,p_attribute_02=>'N'
+,p_attribute_03=>'N'
+,p_attribute_04=>'BOTH'
 );
 wwv_flow_api.create_page_process(
  p_id=>wwv_flow_api.id(79586016098980726)
@@ -551,102 +605,107 @@ wwv_flow_api.create_page_process(
 ,p_process_name=>'FC_INSERT'
 ,p_process_sql_clob=>wwv_flow_string.join(wwv_flow_t_varchar2(
 'MERGE INTO FRONTCOUNS fc',
-'USING (SELECT :P3_ENTER_DATE AS ENTER_DATE,',
-'              :P3_FC_EMP_ID AS FC_EMP_ID,',
-'              :P3_COUNS_PHONE AS COUNS_PHONE,',
-'              :P3_ACD AS ACD,',
-'              :P3_IN_PERSON AS IN_PERSON,',
-'              :P3_NOT_SIGNED_IN AS NOT_SIGNED_IN,',
-'              :P3_EMAILIN AS EMAILIN,',
-'              :P3_EMAILOUT AS EMAILOUT,',
-'              :P3_CERT AS CERT,',
-'              :P3_STL AS STL,',
-'              :P3_REPORTS AS REPORTS,',
-'              :P3_MISC AS MISC,',
-'              :P3_EVALS AS EVALS,',
-'              :P3_PJ AS PJ,',
-'              :P3_CURR_HS AS CURR_HS,',
-'              :P3_INC_TRANSFER AS INC_TRANSFER,',
-'              :P3_INC_GRAD AS INC_GRAD,',
-'              :P3_CURR_UG AS CURR_UG,',
-'              :P3_MED AS MED,',
-'              :P3_COMBO AS COMBO,',
-'              :P3_FOR_STU AS FOR_STU,',
-'              :P3_ROUTED AS ROUTED',
-'       FROM DUAL) data_to_insert',
-'ON (fc.ENTER_DATE = data_to_insert.ENTER_DATE) -- Define your condition for matching existing rows',
+'USING (',
+'    SELECT',
+'        :P3_ENTER_DATE AS ENTER_DATE,',
+'        :P3_FC_EMP_ID AS FC_EMP_ID,',
+'        :P3_COUNS_PHONE AS COUNS_PHONE,',
+'        :P3_ACD AS ACD,',
+'        :P3_IN_PERSON AS IN_PERSON,',
+'        :P3_NOT_SIGNED_IN AS NOT_SIGNED_IN,',
+'        :P3_EMAILIN AS EMAILIN,',
+'        :P3_EMAILOUT AS EMAILOUT,',
+'        :P3_CERT AS CERT,',
+'        :P3_STL AS STL,',
+'        :P3_REPORTS AS REPORTS,',
+'        :P3_MISC AS MISC,',
+'        :P3_EVALS AS EVALS,',
+'        :P3_PJ AS PJ,',
+'        :P3_CURR_HS AS CURR_HS,',
+'        :P3_INC_TRANSFER AS INC_TRANSFER,',
+'        :P3_INC_GRAD AS INC_GRAD,',
+'        :P3_CURR_UG AS CURR_UG,',
+'        :P3_MED AS MED,',
+'        :P3_COMBO AS COMBO,',
+'        :P3_FOR_STU AS FOR_STU,',
+'        :P3_ROUTED AS ROUTED,',
+'        :P3_NOTE AS NOTE',
+'    FROM DUAL',
+') data_to_insert',
+'ON (fc.FC_EMP_ID = data_to_insert.FC_EMP_ID AND fc.ENTER_DATE = data_to_insert.ENTER_DATE)',
 'WHEN MATCHED THEN',
-'  UPDATE SET',
-'    fc.FC_EMP_ID = data_to_insert.FC_EMP_ID,',
-'    fc.COUNS_PHONE = data_to_insert.COUNS_PHONE,',
-'    fc.ACD = data_to_insert.ACD,',
-'    fc.IN_PERSON = data_to_insert.IN_PERSON,',
-'    fc.NOT_SIGNED_IN = data_to_insert.NOT_SIGNED_IN,',
-'    fc.EMAILIN = data_to_insert.EMAILIN,',
-'    fc.EMAILOUT = data_to_insert.EMAILOUT,',
-'    fc.CERT = data_to_insert.CERT,',
-'    fc.STL = data_to_insert.STL,',
-'    fc.REPORTS = data_to_insert.REPORTS,',
-'    fc.MISC = data_to_insert.MISC,',
-'    fc.EVALS = data_to_insert.EVALS,',
-'    fc.PJ = data_to_insert.PJ,',
-'    fc.CURR_HS = data_to_insert.CURR_HS,',
-'    fc.INC_TRANSFER = data_to_insert.INC_TRANSFER,',
-'    fc.INC_GRAD = data_to_insert.INC_GRAD,',
-'    fc.CURR_UG = data_to_insert.CURR_UG,',
-'    fc.MED = data_to_insert.MED,',
-'    fc.COMBO = data_to_insert.COMBO,',
-'    fc.FOR_STU = data_to_insert.FOR_STU,',
-'    fc.ROUTED = data_to_insert.ROUTED',
+'    UPDATE SET',
+'        fc.COUNS_PHONE = data_to_insert.COUNS_PHONE,',
+'        fc.ACD = data_to_insert.ACD,',
+'        fc.IN_PERSON = data_to_insert.IN_PERSON,',
+'        fc.NOT_SIGNED_IN = data_to_insert.NOT_SIGNED_IN,',
+'        fc.EMAILIN = data_to_insert.EMAILIN,',
+'        fc.EMAILOUT = data_to_insert.EMAILOUT,',
+'        fc.CERT = data_to_insert.CERT,',
+'        fc.STL = data_to_insert.STL,',
+'        fc.REPORTS = data_to_insert.REPORTS,',
+'        fc.MISC = data_to_insert.MISC,',
+'        fc.EVALS = data_to_insert.EVALS,',
+'        fc.PJ = data_to_insert.PJ,',
+'        fc.CURR_HS = data_to_insert.CURR_HS,',
+'        fc.INC_TRANSFER = data_to_insert.INC_TRANSFER,',
+'        fc.INC_GRAD = data_to_insert.INC_GRAD,',
+'        fc.CURR_UG = data_to_insert.CURR_UG,',
+'        fc.MED = data_to_insert.MED,',
+'        fc.COMBO = data_to_insert.COMBO,',
+'        fc.FOR_STU = data_to_insert.FOR_STU,',
+'        fc.ROUTED = data_to_insert.ROUTED,',
+'        fc.NOTE = data_to_insert.NOTE',
 'WHEN NOT MATCHED THEN',
-'  INSERT (',
-'    ENTER_DATE,',
-'    FC_EMP_ID,',
-'    COUNS_PHONE,',
-'    ACD,',
-'    IN_PERSON,',
-'    NOT_SIGNED_IN,',
-'    EMAILIN,',
-'    EMAILOUT,',
-'    CERT,',
-'    STL,',
-'    REPORTS,',
-'    MISC,',
-'    EVALS,',
-'    PJ,',
-'    CURR_HS,',
-'    INC_TRANSFER,',
-'    INC_GRAD,',
-'    CURR_UG,',
-'    MED,',
-'    COMBO,',
-'    FOR_STU,',
-'    ROUTED',
-'  )',
-'  VALUES (',
-'    data_to_insert.ENTER_DATE,',
-'    data_to_insert.FC_EMP_ID,',
-'    data_to_insert.COUNS_PHONE,',
-'    data_to_insert.ACD,',
-'    data_to_insert.IN_PERSON,',
-'    data_to_insert.NOT_SIGNED_IN,',
-'    data_to_insert.EMAILIN,',
-'    data_to_insert.EMAILOUT,',
-'    data_to_insert.CERT,',
-'    data_to_insert.STL,',
-'    data_to_insert.REPORTS,',
-'    data_to_insert.MISC,',
-'    data_to_insert.EVALS,',
-'    data_to_insert.PJ,',
-'    data_to_insert.CURR_HS,',
-'    data_to_insert.INC_TRANSFER,',
-'    data_to_insert.INC_GRAD,',
-'    data_to_insert.CURR_UG,',
-'    data_to_insert.MED,',
-'    data_to_insert.COMBO,',
-'    data_to_insert.FOR_STU,',
-'    data_to_insert.ROUTED',
-'  );',
+'    INSERT (',
+'        ENTER_DATE,',
+'        FC_EMP_ID,',
+'        COUNS_PHONE,',
+'        ACD,',
+'        IN_PERSON,',
+'        NOT_SIGNED_IN,',
+'        EMAILIN,',
+'        EMAILOUT,',
+'        CERT,',
+'        STL,',
+'        REPORTS,',
+'        MISC,',
+'        EVALS,',
+'        PJ,',
+'        CURR_HS,',
+'        INC_TRANSFER,',
+'        INC_GRAD,',
+'        CURR_UG,',
+'        MED,',
+'        COMBO,',
+'        FOR_STU,',
+'        ROUTED,',
+'        NOTE',
+'    ) VALUES (',
+'        data_to_insert.ENTER_DATE,',
+'        data_to_insert.FC_EMP_ID,',
+'        data_to_insert.COUNS_PHONE,',
+'        data_to_insert.ACD,',
+'        data_to_insert.IN_PERSON,',
+'        data_to_insert.NOT_SIGNED_IN,',
+'        data_to_insert.EMAILIN,',
+'        data_to_insert.EMAILOUT,',
+'        data_to_insert.CERT,',
+'        data_to_insert.STL,',
+'        data_to_insert.REPORTS,',
+'        data_to_insert.MISC,',
+'        data_to_insert.EVALS,',
+'        data_to_insert.PJ,',
+'        data_to_insert.CURR_HS,',
+'        data_to_insert.INC_TRANSFER,',
+'        data_to_insert.INC_GRAD,',
+'        data_to_insert.CURR_UG,',
+'        data_to_insert.MED,',
+'        data_to_insert.COMBO,',
+'        data_to_insert.FOR_STU,',
+'        data_to_insert.ROUTED,',
+'        data_to_insert.NOTE',
+'    );',
 ''))
 ,p_error_display_location=>'INLINE_IN_NOTIFICATION'
 ,p_process_when_button_id=>wwv_flow_api.id(56819108312700714)
@@ -664,7 +723,7 @@ wwv_flow_api.create_page_process(
 '  AND FC_EMP_ID = :P3_FC_EMP_ID;'))
 ,p_error_display_location=>'INLINE_IN_NOTIFICATION'
 ,p_process_when_button_id=>wwv_flow_api.id(79586160332980727)
-,p_process_success_message=>'Record Deleted'
+,p_process_success_message=>'Delete Completed'
 );
 wwv_flow_api.create_page_process(
  p_id=>wwv_flow_api.id(79521301301422748)

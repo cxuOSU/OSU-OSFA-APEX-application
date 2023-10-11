@@ -27,7 +27,7 @@ prompt APPLICATION 165 - OSU - Stillwater Stats Database
 -- Application Export:
 --   Application:     165
 --   Name:            OSU - Stillwater Stats Database
---   Date and Time:   13:52 Friday October 6, 2023
+--   Date and Time:   16:50 Wednesday October 11, 2023
 --   Exported By:     XCHEN
 --   Flashback:       0
 --   Export Type:     Page Export
@@ -50,12 +50,12 @@ wwv_flow_api.create_page(
 ,p_autocomplete_on_off=>'OFF'
 ,p_page_template_options=>'#DEFAULT#'
 ,p_last_updated_by=>'XCHEN'
-,p_last_upd_yyyymmddhh24miss=>'20231006135206'
+,p_last_upd_yyyymmddhh24miss=>'20231011111045'
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(56915561374068524)
 ,p_plug_name=>'Front Counselor Specific date Stats'
-,p_region_template_options=>'#DEFAULT#:t-Region--scrollBody'
+,p_region_template_options=>'#DEFAULT#:t-Region--noBorder:t-Region--scrollBody:t-Form--slimPadding:margin-top-lg'
 ,p_plug_template=>wwv_flow_api.id(56680630296843656)
 ,p_plug_display_sequence=>10
 ,p_include_in_reg_disp_sel_yn=>'Y'
@@ -67,7 +67,7 @@ wwv_flow_api.create_page_plug(
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(79823554720203527)
 ,p_plug_name=>'Report'
-,p_region_template_options=>'#DEFAULT#'
+,p_region_template_options=>'#DEFAULT#:t-IRR-region--noBorders'
 ,p_component_template_options=>'#DEFAULT#'
 ,p_plug_template=>wwv_flow_api.id(56679590484843656)
 ,p_plug_display_sequence=>20
@@ -332,6 +332,26 @@ wwv_flow_api.create_worksheet_rpt(
 ,p_is_default=>'Y'
 ,p_report_columns=>'ENTER_DATE:FC_EMP_ID:COUNS_PHONE:ACD:IN_PERSON:NOT_SIGNED_IN:EMAILIN:EMAILOUT:CERT:STL:REPORTS:MISC:EVALS:PJ:CURR_HS:INC_TRANSFER:INC_GRAD:CURR_UG:MED:COMBO:FOR_STU:ROUTED'
 );
+wwv_flow_api.create_page_plug(
+ p_id=>wwv_flow_api.id(80420513740594613)
+,p_plug_name=>'Notes in this day'
+,p_region_template_options=>'#DEFAULT#:t-Region--scrollBody'
+,p_escape_on_http_output=>'Y'
+,p_plug_template=>wwv_flow_api.id(56680630296843656)
+,p_plug_display_sequence=>30
+,p_include_in_reg_disp_sel_yn=>'Y'
+,p_plug_display_point=>'BODY'
+,p_query_type=>'TABLE'
+,p_query_table=>'FRONTCOUNS'
+,p_query_where=>'ENTER_DATE = :FC_DATE'
+,p_include_rowid_column=>false
+,p_plug_source_type=>'NATIVE_JQM_LIST_VIEW'
+,p_plug_query_num_rows=>15
+,p_plug_query_options=>'DERIVED_REPORT_COLUMNS'
+,p_attribute_02=>'NOTE'
+,p_attribute_06=>'FC_EMP_ID'
+,p_attribute_16=>'f?p=&APP_ID.:3:&SESSION.::&DEBUG.:RP:P3_FC_EMP_ID,P3_ENTER_DATE:&FC_EMP_ID.,&ENTER_DATE.'
+);
 wwv_flow_api.create_page_button(
  p_id=>wwv_flow_api.id(56915710373068526)
 ,p_button_sequence=>20
@@ -341,7 +361,7 @@ wwv_flow_api.create_page_button(
 ,p_button_template_options=>'#DEFAULT#'
 ,p_button_template_id=>wwv_flow_api.id(56738600440843712)
 ,p_button_is_hot=>'Y'
-,p_button_image_alt=>'FC FETCH DATA'
+,p_button_image_alt=>'Fetch'
 ,p_button_position=>'BODY'
 ,p_grid_new_row=>'N'
 ,p_grid_new_column=>'N'
@@ -351,10 +371,10 @@ wwv_flow_api.create_page_item(
 ,p_name=>'FC_DATE'
 ,p_item_sequence=>10
 ,p_item_plug_id=>wwv_flow_api.id(56915561374068524)
-,p_prompt=>'FC DATE'
+,p_prompt=>'Date'
 ,p_display_as=>'NATIVE_DATE_PICKER'
 ,p_cSize=>30
-,p_colspan=>5
+,p_colspan=>3
 ,p_field_template=>wwv_flow_api.id(56737573338843710)
 ,p_item_template_options=>'#DEFAULT#'
 ,p_attribute_04=>'button'

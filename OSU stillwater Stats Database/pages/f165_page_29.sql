@@ -27,7 +27,7 @@ prompt APPLICATION 165 - OSU - Stillwater Stats Database
 -- Application Export:
 --   Application:     165
 --   Name:            OSU - Stillwater Stats Database
---   Date and Time:   15:42 Monday October 9, 2023
+--   Date and Time:   16:50 Wednesday October 11, 2023
 --   Exported By:     XCHEN
 --   Flashback:       0
 --   Export Type:     Page Export
@@ -51,12 +51,12 @@ wwv_flow_api.create_page(
 ,p_page_template_options=>'#DEFAULT#'
 ,p_protection_level=>'C'
 ,p_last_updated_by=>'XCHEN'
-,p_last_upd_yyyymmddhh24miss=>'20231009152124'
+,p_last_upd_yyyymmddhh24miss=>'20231011140237'
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(79365509997193109)
-,p_plug_name=>'DateSelector'
-,p_region_template_options=>'#DEFAULT#:t-Region--scrollBody'
+,p_plug_name=>'Data Entry File Room Specific date'
+,p_region_template_options=>'#DEFAULT#:t-Region--textContent:t-Region--scrollBody:margin-bottom-lg'
 ,p_plug_template=>wwv_flow_api.id(56680630296843656)
 ,p_plug_display_sequence=>10
 ,p_include_in_reg_disp_sel_yn=>'Y'
@@ -207,7 +207,7 @@ wwv_flow_api.create_page_button(
 ,p_button_template_options=>'#DEFAULT#'
 ,p_button_template_id=>wwv_flow_api.id(56738600440843712)
 ,p_button_is_hot=>'Y'
-,p_button_image_alt=>'Fetch Date'
+,p_button_image_alt=>'Fetch'
 ,p_button_position=>'BELOW_BOX'
 ,p_button_alignment=>'LEFT'
 );
@@ -219,6 +219,7 @@ wwv_flow_api.create_page_item(
 ,p_prompt=>'Date'
 ,p_display_as=>'NATIVE_DATE_PICKER'
 ,p_cSize=>30
+,p_colspan=>3
 ,p_field_template=>wwv_flow_api.id(56737573338843710)
 ,p_item_template_options=>'#DEFAULT#'
 ,p_attribute_04=>'button'
