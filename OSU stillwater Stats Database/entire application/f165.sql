@@ -27,7 +27,7 @@ prompt APPLICATION 165 - OSU - OSFA Statistics
 -- Application Export:
 --   Application:     165
 --   Name:            OSU - OSFA Statistics
---   Date and Time:   11:41 Wednesday October 18, 2023
+--   Date and Time:   14:29 Wednesday October 18, 2023
 --   Exported By:     XCHEN
 --   Flashback:       0
 --   Export Type:     Application Export
@@ -117,7 +117,7 @@ wwv_flow_api.create_flow(
 ,p_substitution_string_01=>'APP_NAME'
 ,p_substitution_value_01=>'OSFA STATS'
 ,p_last_updated_by=>'XCHEN'
-,p_last_upd_yyyymmddhh24miss=>'20231018113607'
+,p_last_upd_yyyymmddhh24miss=>'20231018134649'
 ,p_file_prefix => nvl(wwv_flow_application_install.get_static_app_file_prefix,'')
 ,p_files_version=>54
 ,p_ui_type_name => null
@@ -1429,11 +1429,6 @@ wwv_flow_api.create_page_group(
  p_id=>wwv_flow_api.id(56764304476843773)
 ,p_group_name=>'Administration'
 );
-end;
-/
-prompt --application/comments
-begin
-null;
 end;
 /
 prompt --application/shared_components/navigation/breadcrumbs/breadcrumb
@@ -32161,7 +32156,7 @@ wwv_flow_api.create_page(
 '.feedback-neutral { color: #eb9f41; }',
 '.feedback-negative { color: #f44336; }'))
 ,p_page_template_options=>'#DEFAULT#:ui-dialog--stretch:t-Dialog--noPadding'
-,p_required_role=>wwv_flow_api.id(80983331678246852)
+,p_required_role=>wwv_flow_api.id(81229368966600853)
 ,p_required_patch=>wwv_flow_api.id(81087786829432101)
 ,p_help_text=>wwv_flow_string.join(wwv_flow_t_varchar2(
 '<p>Feedback can be entered by end users from any normal page within the application.</p>',
@@ -32169,7 +32164,7 @@ wwv_flow_api.create_page(
 '<p>Click the edit icon (yellow pencil) to enter a response or update the feedback status.</p>',
 '<p><em><strong>Note:</strong> If feedback recipients have been defined then feedback submissions will also be emailed to the email addresses in the feedback recipients list.</em></p>'))
 ,p_last_updated_by=>'XCHEN'
-,p_last_upd_yyyymmddhh24miss=>'20231017094951'
+,p_last_upd_yyyymmddhh24miss=>'20231018134649'
 );
 wwv_flow_api.create_page_plug(
  p_id=>wwv_flow_api.id(81090356277432109)
